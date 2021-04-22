@@ -25,12 +25,19 @@ function App() {
     cartcost()
   }, [cart])
 
+
   const addcart = (id) => {
     const productid = products.findIndex(ul => ul.id === id)
-    const productinfo = { ...products[productid],qty:1 }
-    setcart([...cart, productinfo])
-
+    console.log(productid)
+    if (cart.some(item => item.id === id)) {
+      console.log("hii bitch")
+    }
+    else {
+      const productinfo = { ...products[productid], qty: 1 }
+      setcart([...cart, productinfo])
+    }
   }
+
   const deleteitem = (id) => {
     setcart(cart.filter(ul => ul.id !== id))
   }
@@ -38,24 +45,28 @@ function App() {
     let cost = cart.reduce(function (prev, cur) {
       return parseInt(prev + parseInt(cur.cost));
     }, 0);
-    console.log(cost)
-  }
-  const qtychange =(e) =>{
-   {/*} const itemid = cart.findIndex(ul=>ul.id === id)
-    const item = {...cart[itemid]}
-    item.qty = e.target.value
-    const items =[...cart]
-    items[itemid]=item
-  setcart(items)*/}
-  console.log(e)
-    
 
+    return cost
   }
+  const handlechange = (e, id) => {
+    console.log(e.target.value, id)
+    const cartid = cart.findIndex(ul => ul.id === id)
+    const iteminfo = { ...cart[cartid] }
+    const productinfo = { ...products[cartid] }
+    const p_cost = productinfo.cost
+    iteminfo.qty = e.target.value
+
+    iteminfo.cost = p_cost * iteminfo.qty
+    const cartclone = [...cart]
+    cartclone[cartid] = iteminfo
+    setcart(cartclone)
+}
+
   return (
     <div className="App">
       <h1>E-Commerce</h1>
       <Products products={products} addcart={(id) => addcart(id)} />
-      <Cart cart={cart} deleteitem={deleteitem} change={()=>qtychange()} cost={cartcost} />
+      <Cart cart={cart} products ={products} deleteitem={deleteitem} setcart={setcart} cost={cartcost} change ={handlechange} />
 
     </div>
   );
