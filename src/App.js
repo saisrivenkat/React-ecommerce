@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Products from './Components/Products'
 import Cart from './Components/Cart'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 function App() {
   const [products, setproducts] = useState([
     {
@@ -20,9 +27,13 @@ function App() {
     }
   ])
   const [cart, setcart] = useState([])
+  useEffect(() => {
+    getlocalstorage()
 
+  }, [])
   useEffect(() => {
     cartcost()
+    savelocalstorage()
   }, [cart])
 
 
@@ -55,20 +66,44 @@ function App() {
     const productinfo = { ...products[cartid] }
     const p_cost = productinfo.cost
     iteminfo.qty = e.target.value
-
     iteminfo.cost = p_cost * iteminfo.qty
     const cartclone = [...cart]
     cartclone[cartid] = iteminfo
     setcart(cartclone)
-}
+  }
+  //save local
+  const savelocalstorage = () => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
+  const getlocalstorage = () => {
+    if (localStorage.getItem('cart') === null) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    }
+    else {
+      let localcart = JSON.parse(localStorage.getItem('cart'))
+      console.log(localcart)
+      setcart(localcart)
+    }
+  }
 
   return (
-    <div className="App">
-      <h1>E-Commerce</h1>
-      <Products products={products} addcart={(id) => addcart(id)} />
-      <Cart cart={cart} products ={products} deleteitem={deleteitem} setcart={setcart} cost={cartcost} change ={handlechange} />
+    <Router>
+      <div className="App">
+        <h1>E-Commerce</h1>
+        <Switch>
+          <Route exact path="/">
+            <Products products={products} addcart={addcart} cart={cart} />
+          </Route>
+          <Route path="/cart">
+            <Cart cart={cart} products={products} deleteitem={deleteitem} setcart={setcart} cost={cartcost} change={handlechange} />
+          </Route>
+        </Switch>
 
-    </div>
+
+
+      </div>
+    </Router>
   );
 }
 

@@ -1,8 +1,9 @@
 import React from 'react'
 
-export default function Products({ products, addcart }) {
+export default function Products({ products, addcart, cart }) {
     return (
         <>
+            <p>cartlength is :{cart.length}</p>
             {products.map(product => {
                 return (
                     <div>
