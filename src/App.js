@@ -14,16 +14,19 @@ function App() {
       id: 1,
       title: "Sunflower oil",
       cost: 180,
+      category:"household"
     },
     {
       id: 2,
       title: "iphone",
       cost: 100,
+      category:"phones"
     },
     {
       id: 3,
       title: "mango pickle",
-      cost: 120
+      cost: 120,
+      category:"household"
     }
   ])
   const [cart, setcart] = useState([])
@@ -89,7 +92,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{backgroundColor: "#EAEDED"}}>
         <h1>E-Commerce</h1>
         <Switch>
           <Route exact path="/">
