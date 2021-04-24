@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import "./App.css"
 
 function App() {
   const [products, setproducts] = useState([
@@ -14,22 +15,26 @@ function App() {
       id: 1,
       title: "Sunflower oil",
       cost: 180,
-      category:"household"
+      category: "household",
+      img: "https://storage.sg.content-cdn.io/cdn-cgi/image/width=600,height=600,quality=75,format=auto,fit=cover,g=top/in-resources/075ba640-9325-4e0e-8157-cdf49e2a8909/Images/ProductImages/Source/100038345.jpg"
     },
     {
       id: 2,
       title: "iphone",
       cost: 100,
-      category:"phones"
+      category: "phones",
+      img: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg"
     },
     {
       id: 3,
       title: "mango pickle",
       cost: 120,
-      category:"household"
+      category: "household",
+      img: "https://www.bigbasket.com/media/uploads/p/xxl/40202784_3-dabur-hommade-mango-pickle.jpg"
     }
   ])
   const [cart, setcart] = useState([])
+
   useEffect(() => {
     getlocalstorage()
 
@@ -62,17 +67,22 @@ function App() {
 
     return cost
   }
+
+
+
   const handlechange = (e, id) => {
-    console.log(e.target.value, id)
     const cartid = cart.findIndex(ul => ul.id === id)
     const iteminfo = { ...cart[cartid] }
-    const productinfo = { ...products[cartid] }
+    const p_id = products.find(ul => ul.id === iteminfo.id)
+    const p_index = products.findIndex(ul => ul.id === p_id.id)
+    const productinfo = { ...products[p_index] }
     const p_cost = productinfo.cost
     iteminfo.qty = e.target.value
     iteminfo.cost = p_cost * iteminfo.qty
     const cartclone = [...cart]
     cartclone[cartid] = iteminfo
     setcart(cartclone)
+    console.log(iteminfo.img)
   }
   //save local
   const savelocalstorage = () => {
@@ -85,14 +95,14 @@ function App() {
     }
     else {
       let localcart = JSON.parse(localStorage.getItem('cart'))
-      console.log(localcart)
+
       setcart(localcart)
     }
   }
 
   return (
     <Router>
-      <div className="App" style={{backgroundColor: "#EAEDED"}}>
+      <div className="App" style={{ backgroundColor: "#EAEDED" }}>
         <h1>E-Commerce</h1>
         <Switch>
           <Route exact path="/">
