@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Kitchen = ({ products, addcart }) => {
-    return (
+const Everyday=({products,addcart})=>{
+    return(
         <div className="container">
-            <h3 style={{ padding: "20px" }}>Choclates</h3>
+            <h3 style={{ padding: "20px" }}>Everyday Essentials</h3>
             <div className="row">
-                {products.filter(item => {
+                {products.filter(item =>{
 
-                    if (item.category === "choclates") {
+                    if (item.category === "everyday") {
                         return item
                     }
                 }).map(item => {
@@ -29,4 +29,4 @@ const Kitchen = ({ products, addcart }) => {
         </div>
     )
 }
-export default Kitchen;
+export default Everyday

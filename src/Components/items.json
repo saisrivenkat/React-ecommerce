@@ -9,7 +9,7 @@
     {
         "id": 2,
         "title": "iphone",
-        "cost": 100,
+        "cost": 85000,
         "category": "phones",
         "img": "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg"
     },
@@ -33,5 +33,19 @@
         "cost": 120.00,
         "category": "choclates",
         "img": "https://images-eu.ssl-images-amazon.com/images/I/41luA-Pzh5L._AC_SX184_.jpg"
+    },
+    {
+        "id": 6,
+        "title": "Dettol Original Germ Protection Handwash Liquid Soap Refill",
+        "cost": 150.00,
+        "category": "everyday",
+        "img": "https://m.media-amazon.com/images/I/61KhcBJFnIL._AC._SR360,460.jpg"
+    },
+    {
+        "id": 7,
+        "title": "Surf Excel Matic Front Load Liquid Detergent Refill Pouch",
+        "cost": 350.00,
+        "category": "everyday",
+        "img": "https://m.media-amazon.com/images/I/71AfKPJFjoL._AC._SR360,460.jpg"
     }
 ]

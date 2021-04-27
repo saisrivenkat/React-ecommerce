@@ -3,17 +3,19 @@ import Products from './Components/Products'
 import Items from './Components/items.json'
 import Cart from './Components/Cart'
 import Choclates from './Components/Choclates'
+import Kitchen from './Components/Kitchen'
+import Phones from './Components/Phones'
+import Everyday from './Components/Everyday'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Header from './Components/Header'
 import "./App.css"
 
 function App() {
-  const [products, setproducts] = useState(Items)
+  const [products] = useState(Items)
   const [cart, setcart] = useState([])
 
   useEffect(() => {
@@ -38,10 +40,6 @@ function App() {
       return 'disabled'
     }
   }
-
-  const deleteitem = (id) => {
-    setcart(cart.filter(ul => ul.id !== id))
-  }
   const cartcost = () => {
     let cost = cart.reduce(function (prev, cur) {
       return parseInt(prev + parseInt(cur.cost));
@@ -49,6 +47,11 @@ function App() {
 
     return cost
   }
+
+  const deleteitem = (id) => {
+    setcart(cart.filter(ul => ul.id !== id))
+  }
+
 
 
 
@@ -84,7 +87,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App" style={{ backgroundColor: "#EAEDED", height: "100vh" }}>
+      <div className="App" style={{ backgroundColor: "#EAEDED" }}>
         <Header cart={cart} />
         <Switch>
           <Route exact path="/">
@@ -93,6 +96,15 @@ function App() {
           </Route>
           <Route path="/choclates">
             <Choclates products={products} addcart={addcart} cart={cart} />
+          </Route>
+          <Route path="/phones">
+            <Phones products={products} addcart={addcart} cart={cart} />
+          </Route>
+          <Route path="/kitchen">
+            <Kitchen products={products} addcart={addcart} cart={cart} />
+          </Route>
+          <Route path="/everyday-essentials">
+            <Everyday products={products} addcart={addcart} cart={cart} />
           </Route>
           <Route path="/cart">
             <Cart cart={cart} products={products} deleteitem={deleteitem} setcart={setcart} cost={cartcost} change={handlechange} />

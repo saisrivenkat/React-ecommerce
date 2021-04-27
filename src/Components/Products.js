@@ -22,7 +22,7 @@ export default function Products({ products, addcart, cart }) {
                         <Home_cards
                             title="Kitchen and dinning"
                             img="https://static.toiimg.com/photo/76432196.cms"
-                            link="!" />
+                            link="/kitchen" />
                     </div>
                 </div>
                 <div className="col-lg-3">
@@ -30,7 +30,7 @@ export default function Products({ products, addcart, cart }) {
                         <Home_cards
                             title="Laptops and Phones"
                             img="https://www.windowscentral.com/sites/wpcentral.com/files/styles/xlarge_wm_brb/public/field/image/2021/01/hp-spectre-x360-14-hero3.jpg"
-                            link="!" />
+                            link="/phones" />
                     </div>
                 </div>
                 <div className="col-lg-3">
@@ -38,7 +38,7 @@ export default function Products({ products, addcart, cart }) {
                         <Home_cards
                             title="Everyday essential"
                             img="https://images-eu.ssl-images-amazon.com/images/G/31/img18/HPC/GW/Desktop-Qc-1x_4._SY116_CB431329535_.jpg"
-                            link="!" />
+                            link="/everyday-essentials" />
                     </div>
                 </div>
 
