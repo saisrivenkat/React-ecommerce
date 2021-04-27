@@ -1,69 +1,64 @@
 /* eslint-disable no-lone-blocks */
 import React from 'react'
-import Display from '../Components/Display'
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function Cart({ cart, deleteitem, change, cost }) {
-
-
     return (
-        <section className="container-fluid">
+        <section className="container-fluid mt-3">
             <div className="row">
-                <div className="col-lg-8">
+                <div className="col-lg-9">
+                    <div class="card mb-3" style={{}}>
+                        <h3 className="p-3">Shopping Cart</h3>
+                        <hr className="m-0" />
+                        {cart.map(item => {
+                            return (
+                                <div class="row g-0">
+                                    <div class="col-md-3" style={{ textAlign: "center", padding: "15px" }}>
+                                        <img src={item.img} alt="..." className="img-fluid " />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="card-title">{item.title} </h5>
+                                                <span>Rs.<strong>{item.cost}</strong></span>
+                                            </div>
 
-                    <div class="card wish-list mb-3">
-                        <div class="card-body p-4" >
-                            <h5 class="mb-4">Cart (<span>{cart.length}</span> items)</h5>
-                            <div class="row mb-4">
-                                {cart.map((item) => {
-                                    return (
-                                        <Display
-                                            id={item.id}
-                                            i_name={item.title}
-                                            cost={item.cost}
-                                            img={item.img}
-                                            deleteitem={deleteitem}
-                                            change={change}
-                                            qty={item.qty}
+                                            <span className="text-success">In Stock</span><br />
+                                    Qty :<select className="form-select " style={{ width: "100px" }} onChange={(e) => change(e, item.id)} aria-label="Default select example">
+                                                <option selected value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                            <div className="mt-3">
+
+                                                <DeleteIcon style={{ color: "red", cursor: "pointer" }} onClick={() => deleteitem(item.id)} /><span className="text-danger">Delete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr className="container"></hr>
+                                </div>
+
+                            )
+                        })}
 
 
-                                        />
-                                    )
-                                })}
-                            </div>
+                    </div>
+                </div>
+                <div className="col-lg-3">
+                    <div className="img">
+                        <img src="https://images-eu.ssl-images-amazon.com/images/G/31/checkout/assets/TM_desktop._CB443006202_.png" alt="" />
+                    </div>
+                    <div className="card mt-3">
+                        <div className="card-body">
+                            <h5>Subtotal(<span>{cart.length} items</span>):Rs.<strong>{cost()}</strong> </h5>
+                            <button className="btn btn-success w-100" style={{ borderRadius: "20px" }}>Procced to buy</button>
                         </div>
                     </div>
                 </div>
 
-                <div className="col-lg-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-
-                            <h5 class="mb-3">Total amount</h5>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                                    Total amount
-              <span>Rs.{cost()}</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                                    Shipping Charges
-              <span>Rs . 0</span>
-                                </li>
-                                <li class="list-group-item   border-0 px-0 mb-3 ">
-
-                                    <p className="text-end"><strong>Rs.{cost()}</strong></p>
-                                </li>
-                            </ul>
-
-                            <button type="button" class="btn btn-primary btn-block waves-effect waves-light">go to checkout</button>
-
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
-        </section >
+        </section>
     );
 }
 {/*{cart.map((item) => {

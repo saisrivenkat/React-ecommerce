@@ -1,38 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import Products from './Components/Products'
+import Items from './Components/items.json'
 import Cart from './Components/Cart'
+import Choclates from './Components/Choclates'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import Header from './Components/Header'
 import "./App.css"
 
 function App() {
-  const [products, setproducts] = useState([
-    {
-      id: 1,
-      title: "Sunflower oil",
-      cost: 180,
-      category: "household",
-      img: "https://storage.sg.content-cdn.io/cdn-cgi/image/width=600,height=600,quality=75,format=auto,fit=cover,g=top/in-resources/075ba640-9325-4e0e-8157-cdf49e2a8909/Images/ProductImages/Source/100038345.jpg"
-    },
-    {
-      id: 2,
-      title: "iphone",
-      cost: 100,
-      category: "phones",
-      img: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg"
-    },
-    {
-      id: 3,
-      title: "mango pickle",
-      cost: 120,
-      category: "household",
-      img: "https://www.bigbasket.com/media/uploads/p/xxl/40202784_3-dabur-hommade-mango-pickle.jpg"
-    }
-  ])
+  const [products, setproducts] = useState(Items)
   const [cart, setcart] = useState([])
 
   useEffect(() => {
@@ -54,6 +35,7 @@ function App() {
     else {
       const productinfo = { ...products[productid], qty: 1 }
       setcart([...cart, productinfo])
+      return 'disabled'
     }
   }
 
@@ -102,19 +84,20 @@ function App() {
 
   return (
     <Router>
-      <div className="App" style={{ backgroundColor: "#EAEDED" }}>
-        <h1>E-Commerce</h1>
+      <div className="App" style={{ backgroundColor: "#EAEDED", height: "100vh" }}>
+        <Header cart={cart} />
         <Switch>
           <Route exact path="/">
+            {console.log(products)}
             <Products products={products} addcart={addcart} cart={cart} />
+          </Route>
+          <Route path="/choclates">
+            <Choclates products={products} addcart={addcart} cart={cart} />
           </Route>
           <Route path="/cart">
             <Cart cart={cart} products={products} deleteitem={deleteitem} setcart={setcart} cost={cartcost} change={handlechange} />
           </Route>
         </Switch>
-
-
-
       </div>
     </Router>
   );
