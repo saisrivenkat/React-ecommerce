@@ -1,3 +1,6 @@
+html{
+    background-color:rgb(234, 237, 237)
+}
 header{
     display: flex;
     background-color: #131921;
